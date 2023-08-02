@@ -1,0 +1,52 @@
+Introduction to Testing:
+
+to run a test script:
+    command: `forge test` -> this will run your test in a local env
+    
+    append: -vvv to enabled debugger
+    
+    command to test a specific function in our test script
+        : forge test --mt nameOfTestFunction
+    
+    command: forge coverage -> to check how many of our code is tested
+
+TO INSTALL THIRD PARTY SMART CONTRACT FROM GITHUB:  
+    command: `forge install <name of repo>@version_number --no-commit
+
+    repo link: https:github.com/smartcontractkit/chainlink-brownie-contracts 
+    
+    e.g forge install smartcontractkit/chainlink-brownie-contracts@06.1 --no-commit
+
+
+TO RUN A DEPLOYMENT SCRIPT:
+    command: `forge script script/Name.s.sol`
+
+What can we do to work with addresses outside our system?
+
+1. Unit
+    - Testing a specific part of our code
+2. Integration
+    - Testing how our code works with other parts of our code
+3. Forked
+    - Testing our code on a simulated real environment
+4. Staging
+    - Testing our code in real environment that is not prod
+
+
+LESSON 2:
+
+append s_ to any storage variable name e.g s_addressToAmountFunded
+
+always declared a variable with private modifier to save gas cos, change to public if need be 
+
+- PRANKING MSG.SENDER
+    knowing msg.sender in our test script can be little bit confusing
+    so foundry provided a prank method inside vm to make the next TX call be a specific address 
+
+    to do that will call create a constant address using mkAddress from std library 
+    and prank our tx call with the constant address
+
+    e.g: address FAKE_SENDER = makeAddr("Softcoder");
+    function testFunc(){
+        vm.prank(FAKE_SENDER)
+    }
